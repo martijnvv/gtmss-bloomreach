@@ -28,16 +28,90 @@ The template:
 - Receives event data from client-side GTM or other sources
 - Transforms event payloads into the Bloomreach Discovery format
 - Sends HTTP requests to the Bloomreach Discovery tracking endpoint
-- Supports ecommerce events such as:
-  - Product views
-  - Category views
-  - Search events
-  - Add-to-cart
-  - Purchase
 - Allows configurable merchant/account identifiers
 - Handles event mapping via server-side variables
 - Enables structured item array processing
 
+### Supported Event Types
+
+The template supports server-side forwarding of structured Bloomreach Discovery tracking events, including:
+
+- **Product Detail View**  
+  Triggered when a user views a product detail page.  
+  **Required parameters:**
+  - `item_id`  
+  **Recommended parameters:**
+  - Product metadata (e.g., name, category, price)
+  - Page URL
+  - Referrer
+
+- **Category / Listing View**  
+  Triggered when a user views a category page or product listing page.  
+  **Required parameters:**
+  - Category identifier or category name  
+  **Recommended parameters:**
+  - Product impression list (`items` array with `item_id`)
+  - Pagination metadata (e.g., page number)
+
+- **Search Results View**  
+  Triggered when a user performs a search query.  
+  **Required parameters:**
+  - Search query  
+  **Recommended parameters:**
+  - Returned product IDs (`items` array)
+  - Result count
+
+- **Purchase / Conversion View**  
+  Triggered upon successful transaction completion.  
+  **Required parameters:**
+  - `transaction_id`
+  - `value` (total order value)
+  - `currency`
+  - `items` array containing:
+    - `item_id`
+    - `price`
+    - `quantity`
+   
+- **Add to Cart Event**  
+  Triggered when a user adds a product to their cart.  
+  **Required parameters:**
+  - `item_id`
+  - `quantity`  
+  **Recommended parameters:**
+  - `price`
+  - `currency`
+
+- **Search Suggest (Autocomplete) Event**  
+  Triggered when a user interacts with search autocomplete suggestions.  
+  **Required parameters:**
+  - `search_query`
+  - `suggestion` (the selected or displayed suggestion value)  
+  **Recommended parameters:**
+  - Suggestion position (index)
+  - Suggestion type (e.g., query, category, product)
+  - Returned suggestion list (if available)
+
+- **Search Result Click Event**  
+  Triggered when a user clicks on a product from search results.  
+  **Required parameters:**
+  - `search_query`
+  - `item_id`  
+  **Recommended parameters:**
+  - Product position in results
+  - Result list identifier
+  - Page number
+  - `price`
+  - `currency`
+
+- **Quick View Event**  
+  Triggered when a user opens a quick-view modal for a product (without navigating to the full PDP).  
+  **Required parameters:**
+  - `item_id`  
+  **Recommended parameters:**
+  - Product position (if triggered from listing or search)
+  - List context (category or search)
+  - `price`
+  - `currency`
 ---
 
 ## Architecture
