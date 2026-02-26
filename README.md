@@ -136,9 +136,8 @@ Before installing:
 - Bloomreach Discovery account
 - Server-Side GTM container deployed
 - Custom domain configured for GTMSS
-- Bloomreach account configured for server-side tracking
+- Bloomreach account configured for server-side tracking (reach out to your Bloomreach account manager)
 - Tracking endpoint details from Bloomreach
-- Required authentication parameters (if applicable)
 
 ---
 
